@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useCallback, useState } from "react"
 
 import { SearchResults } from "../components/SearchResults";
 
@@ -19,6 +19,10 @@ export default function Home() {
     setResults(data);
   }
 
+  const addToWishlist = useCallback(async (id: number) => {
+    console.log(id);
+  }, []);
+
   return (
     <div>
       <h1>Search</h1>
@@ -32,7 +36,10 @@ export default function Home() {
         <button type="submit">Buscar</button>
       </form>
 
-      <SearchResults results={results} />
+      <SearchResults 
+        results={results}
+        onAddToWishlist={addToWishlist}
+      />
     </div>
   )
 }
@@ -49,4 +56,12 @@ export default function Home() {
  * 2. Renders too often
  * 3. Re-renders with same props
  * 4. Medium to big size
+ */
+
+/**
+ * useMemo / useCallback
+ * 1. Cálculos pesados
+ * 2. Igualdade referencial (quando a gente repassa aquela informação a um componente filho)
+ * 
+ * 1. Igualdade referencial (quando a gente repassa aquela informação a um componente filho)
  */
